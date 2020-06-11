@@ -1,0 +1,17 @@
+age=40-49	89
+age=50-59	91
+breast-quad=left_low	106
+breast-quad=left_up	94
+breast=left	145
+breast=right	132
+deg-malig=1	66
+deg-malig=2	129
+deg-malig=3	82
+inv-nodes=0-2	209
+irradiat=no	215
+irradiat=yes	62
+menopause=ge40	123
+menopause=premeno	149
+node-caps=no	221
+node-caps=yes	56
+tumor-size=30-34	57
