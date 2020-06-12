@@ -1,44 +1,17 @@
-age=40-49	inv-nodes=0-2	67
-age=40-49	irradiat=no	64
-age=40-49	menopause=premeno	80
-age=40-49	node-caps=no	71
-age=50-59	inv-nodes=0-2	68
-age=50-59	irradiat=no	78
-age=50-59	menopause=ge40	56
-age=50-59	node-caps=no	70
-breast-quad=left_low	irradiat=no	81
-breast-quad=left_up	irradiat=no	71
-breast=left	breast-quad=left_low	75
-breast=left	irradiat=no	114
-breast=right	breast-quad=left_up	60
-breast=right	irradiat=no	101
-deg-malig=1	irradiat=no	62
-deg-malig=2	breast=left	64
-deg-malig=2	breast=right	65
-deg-malig=2	irradiat=no	98
-inv-nodes=0-2	breast-quad=left_low	78
-inv-nodes=0-2	breast-quad=left_up	72
-inv-nodes=0-2	breast=left	111
-inv-nodes=0-2	breast=right	98
-inv-nodes=0-2	deg-malig=1	65
-inv-nodes=0-2	deg-malig=2	97
-inv-nodes=0-2	irradiat=no	180
-inv-nodes=0-2	node-caps=no	200
-menopause=ge40	breast=left	68
-menopause=ge40	inv-nodes=0-2	93
-menopause=ge40	irradiat=no	99
-menopause=ge40	node-caps=no	99
-menopause=premeno	breast-quad=left_low	58
-menopause=premeno	breast=left	74
-menopause=premeno	breast=right	75
-menopause=premeno	deg-malig=2	79
-menopause=premeno	inv-nodes=0-2	111
-menopause=premeno	irradiat=no	111
-menopause=premeno	node-caps=no	117
-node-caps=no	breast-quad=left_low	85
-node-caps=no	breast-quad=left_up	76
-node-caps=no	breast=left	115
-node-caps=no	breast=right	106
-node-caps=no	deg-malig=1	66
-node-caps=no	deg-malig=2	103
-node-caps=no	irradiat=no	187
+age=40-49	89
+age=50-59	91
+breast-quad=left_low	106
+breast-quad=left_up	94
+breast=left	145
+breast=right	132
+deg-malig=1	66
+deg-malig=2	129
+deg-malig=3	82
+inv-nodes=0-2	209
+irradiat=no	215
+irradiat=yes	62
+menopause=ge40	123
+menopause=premeno	149
+node-caps=no	221
+node-caps=yes	56
+tumor-size=30-34	57

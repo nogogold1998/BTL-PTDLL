@@ -19,67 +19,68 @@ public class AprioriTID {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         String INPUT_FILE_PATH = "C:\\Users\\nogog\\eclipse-workspace\\BaiTapLonPTDLL\\src\\data\\breast-cancer.arff";
         String OUTPUT_FILE_PATH = "C:\\Users\\nogog\\eclipse-workspace\\BaiTapLonPTDLL\\src\\data\\output";
+        double minSupport = 0.2;
+        long numTransactions = 277;
 
-//        JobConf jobConf = new JobConf();
-//
-//        // truyền vào minSup và số giao dịch
-//        jobConf.setDouble("minSup", 0.2);
-//        jobConf.setLong("numTrans", 277);
-//
-//        try {
-//            FileUtils.deleteDirectory(new File(OUTPUT_FILE_PATH));
-//        } catch (IOException e1) {
-//            // TODO Auto-generated catch block
-//            e1.printStackTrace();
-//        }
-//        FileInputFormat.setInputPaths(jobConf, new Path(INPUT_FILE_PATH));
-//        FileOutputFormat.setOutputPath(jobConf, new Path(OUTPUT_FILE_PATH));
-//
-//        Job job = Job.getInstance(jobConf, "Apriori1");
-//        job.setJarByClass(AprioriTID.class);
-//        // Setup
-//        job.setOutputKeyClass(Text.class);
-//        job.setOutputValueClass(IntWritable.class);
-//
-//        job.setMapperClass(Map1.class);
-//        job.setReducerClass(Reducer1K.class);
-//        System.out.println("Done=" + job.waitForCompletion(true));
+        for (int k = 1; ; k++) {
+            int status = run(k, minSupport, numTransactions, INPUT_FILE_PATH, OUTPUT_FILE_PATH);
+            if (status == 1) {
+                System.out.println("Chạy xong vòng: " + k);
+            } else if (status == 0) {
+                System.out.println("Hoàn thành tại vòng: " + (k - 1));
+                break;
+            } else {
+                System.out.println("Lỗi tại vòng: " + k);
+            }
+        }
+    }
 
-        List<String[]> Ck = apriori_gen(2, "C:\\Users\\nogog\\eclipse-workspace\\BaiTapLonPTDLL\\src\\data\\output\\part-r-00000");
-        JobConf conf2 = new JobConf(AprioriTID.class);
-        conf2.setDouble("minSup", 0.2);
-        conf2.setLong("numTrans", 277);
-        FileInputFormat.setInputPaths(conf2, new Path(INPUT_FILE_PATH));
-        FileOutputFormat.setOutputPath(conf2, new Path(OUTPUT_FILE_PATH + "1"));
-        Job job2 = Job.getInstance(conf2, "Apriori2");
-        job2.setJarByClass(AprioriTID.class);
-        job2.setOutputKeyClass(Text.class);
-        job2.setOutputValueClass(IntWritable.class);
-        MapK.Ck = Ck;
-//        ArrayList<String[]> test = new ArrayList<>();
-//        test.add(new String[]{"40-49","premeno", null, null, null, null, null, null, null});
-//        MapK.Ck = test;
-        job2.setMapperClass(MapK.class);
-        job2.setReducerClass(Reducer1K.class);
+    private static int run(int k, double minSup, long numTrans, String inputPath, String outputPath)
+            throws IOException, InterruptedException, ClassNotFoundException {
+        if (k < 1 || minSup < 0 || minSup > 1 || numTrans < 0)
+            throw new IllegalArgumentException("Sai k hoặc minSup hoặc numTrans");
+        JobConf jobConf = new JobConf();
+
+        // truyền vào minSup và số giao dịch
+        jobConf.setDouble("minSup", minSup);
+        jobConf.setLong("numTrans", numTrans);
+
         try {
-            FileUtils.deleteDirectory(new File(OUTPUT_FILE_PATH + "1"));
+            FileUtils.deleteDirectory(new File(outputPath + k));
         } catch (IOException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-        System.out.println("Done=2" + job2.waitForCompletion(true));
+        FileInputFormat.setInputPaths(jobConf, new Path(inputPath));
+        FileOutputFormat.setOutputPath(jobConf, new Path(outputPath + k));
+
+        Job job = Job.getInstance(jobConf, "Apriori tìm itemset L" + k);
+        job.setJarByClass(AprioriTID.class);
+        // Setup
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(IntWritable.class);
+
+        if (k == 1) {
+            job.setMapperClass(Map1.class);
+            job.setReducerClass(Reducer1K.class);
+        } else {
+            List<String[]> Ck = apriori_gen(k, outputPath + (k - 1) + "\\part-r-00000");
+            if (Ck.isEmpty()) return 0;
+            MapK.Ck = Ck;
+            job.setMapperClass(MapK.class);
+            job.setReducerClass(Reducer1K.class);
+        }
+        return job.waitForCompletion(true) ? 1 : -1;
     }
 
     /**
      * Tìm các tập mục phổ biến ứng viên Ck thứ k >= 2
-     * @param k
-     * @param pathString
-     * @return List ItemSet Columns pattern
-     * @throws IOException
      */
     static List<String[]> apriori_gen(int k, String pathString) throws IOException {
         Path path = new Path(pathString);
         FileSystem fs = FileSystem.get(new Configuration());
+        List<String[]> result = new ArrayList<>();
+        if (!fs.exists(path)) return result;
         BufferedReader br = new BufferedReader(new InputStreamReader(fs.open(path)));
         Set<List<String>> temp_Ck = new HashSet<>();
         for (String line = br.readLine(); line != null; line = br.readLine()) {
@@ -88,7 +89,6 @@ public class AprioriTID {
         }
 
         List<List<String>> Ck = new ArrayList<>(temp_Ck);
-        List<String[]> result = new ArrayList<>();
         for (int i = 0; i < temp_Ck.size() - 1; i++) {
             List<String> itemSetI = Ck.get(i);
             for (int j = i + 1; j < temp_Ck.size(); j++) {
@@ -108,15 +108,12 @@ public class AprioriTID {
                 }
             }
         }
-        for(String[] i : result){
-            System.out.println(Arrays.toString(i));
-        }
         return result;
     }
 
-    static String[] toItemSetCols(List<String> itemSet){
+    static String[] toItemSetCols(List<String> itemSet) {
         String[] result = new String[9];
-        for(String item : itemSet) {
+        for (String item : itemSet) {
             int colIndex;
             String[] cols = item.split("=");
             switch (cols[0]) {
