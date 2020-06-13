@@ -6,7 +6,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 import java.util.List;
 
-public class MapK extends Mapper<LongWritable, Text, Text, IntWritable> {
+public final class MapK extends Mapper<LongWritable, Text, Text, IntWritable> {
     public static volatile List<String[]> Ck;
     static final String[] columnNames = new String[]{
             "age", "menopause", "tumor-size", "inv-nodes", "node-caps", "deg-malig", "breast", "breast-quad", "irradiat"};
@@ -22,7 +22,8 @@ public class MapK extends Mapper<LongWritable, Text, Text, IntWritable> {
             if(itemSetCol.length != cells.length) throw new IllegalStateException("Độ dài Ck khác cell");
             String textKey = "";
             for(int i = 0; i < cells.length; i++){
-                if(itemSetCol[i] == null || itemSetCol[i].isEmpty()) continue;
+                if(itemSetCol[i] == null || itemSetCol[i].isEmpty()) //noinspection UnnecessaryContinue
+                    continue;
                 else if(itemSetCol[i].equals(cells[i])) textKey += columnNames[i] + "=" + cells[i] + "\t";
                 else {
                     textKey = "";

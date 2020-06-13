@@ -15,10 +15,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class AprioriTID {
+public final class AprioriTID {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         String INPUT_FILE_PATH = "C:\\Users\\nogog\\eclipse-workspace\\BaiTapLonPTDLL\\src\\data\\breast-cancer.arff";
-        String OUTPUT_FILE_PATH = "C:\\Users\\nogog\\eclipse-workspace\\BaiTapLonPTDLL\\src\\data\\output";
+        String OUTPUT_FILE_PATH = "C:\\Users\\nogog\\eclipse-workspace\\BaiTapLonPTDLL\\src\\data\\output\\";
         double minSupport = 0.2;
         long numTransactions = 277;
 
@@ -45,12 +45,8 @@ public class AprioriTID {
         jobConf.setDouble("minSup", minSup);
         jobConf.setLong("numTrans", numTrans);
 
-        try {
-            FileUtils.deleteDirectory(new File(outputPath + k));
-        } catch (IOException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
+        // Xóa thư mục trước
+        FileUtils.deleteDirectory(new File(outputPath + k));
         FileInputFormat.setInputPaths(jobConf, new Path(inputPath));
         FileOutputFormat.setOutputPath(jobConf, new Path(outputPath + k));
 
@@ -62,14 +58,13 @@ public class AprioriTID {
 
         if (k == 1) {
             job.setMapperClass(Map1.class);
-            job.setReducerClass(Reducer1K.class);
         } else {
             List<String[]> Ck = apriori_gen(k, outputPath + (k - 1) + "\\part-r-00000");
             if (Ck.isEmpty()) return 0;
             MapK.Ck = Ck;
             job.setMapperClass(MapK.class);
-            job.setReducerClass(Reducer1K.class);
         }
+        job.setReducerClass(Reducer1K.class);
         return job.waitForCompletion(true) ? 1 : -1;
     }
 
