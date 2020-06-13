@@ -1,0 +1,49 @@
+(age=40-49	irradiat=no)=64	=>	menopause=premeno=59	0.921875
+(age=40-49	menopause=premeno	node-caps=no)=64	=>	inv-nodes=0-2=58	0.90625
+(age=40-49	node-caps=no)=71	=>	menopause=premeno=64	0.9014084507042254
+(age=50-59	inv-nodes=0-2)=68	=>	irradiat=no=64	0.9411764705882353
+(age=50-59	node-caps=no	irradiat=no)=198	=>	inv-nodes=0-2=186	0.9393939393939394
+(breast-quad=left_low	irradiat=no)=81	=>	menopause=premeno=80	0.9876543209876543
+(breast=left	irradiat=no)=114	=>	menopause=ge40=106	0.9298245614035088
+(deg-malig=1)=66	=>	node-caps=no=66	1.0
+(deg-malig=1)=66	=>	irradiat=no=62	0.9393939393939394
+(deg-malig=1)=66	=>	inv-nodes=0-2=65	0.9848484848484849
+(deg-malig=1	irradiat=no)=62	=>	node-caps=no=62	1.0
+(deg-malig=1	irradiat=no)=62	=>	inv-nodes=0-2=61	0.9838709677419355
+(inv-nodes=0-2)=209	=>	node-caps=no=200	0.9569377990430622
+(inv-nodes=0-2	breast-quad=left_low)=78	=>	node-caps=no=77	0.9871794871794872
+(inv-nodes=0-2	breast-quad=left_low	irradiat=no)=66	=>	node-caps=no=66	1.0
+(inv-nodes=0-2	breast-quad=left_up)=72	=>	node-caps=no=67	0.9305555555555556
+(inv-nodes=0-2	breast-quad=left_up	irradiat=no)=60	=>	node-caps=no=57	0.95
+(inv-nodes=0-2	breast=left)=111	=>	node-caps=no=109	0.9819819819819819
+(inv-nodes=0-2	breast=left	irradiat=no)=98	=>	node-caps=no=97	0.9897959183673469
+(inv-nodes=0-2	breast=right)=98	=>	node-caps=no=91	0.9285714285714286
+(inv-nodes=0-2	breast=right	irradiat=no)=82	=>	node-caps=no=79	0.9634146341463414
+(inv-nodes=0-2	deg-malig=1)=65	=>	irradiat=no=61	0.9384615384615385
+(inv-nodes=0-2	deg-malig=1)=65	=>	node-caps=no=65	1.0
+(inv-nodes=0-2	deg-malig=1	irradiat=no)=61	=>	node-caps=no=61	1.0
+(inv-nodes=0-2	deg-malig=2)=97	=>	node-caps=no=92	0.9484536082474226
+(inv-nodes=0-2	deg-malig=2	irradiat=no)=82	=>	node-caps=no=80	0.975609756097561
+(inv-nodes=0-2	irradiat=no)=180	=>	node-caps=no=176	0.9777777777777777
+(inv-nodes=0-2	node-caps=no	deg-malig=1)=65	=>	irradiat=no=61	0.9384615384615385
+(inv-nodes=0-2	node-caps=no	irradiat=no)=176	=>	menopause=ge40=162	0.9204545454545454
+(menopause=ge40	inv-nodes=0-2)=93	=>	node-caps=no=90	0.967741935483871
+(menopause=ge40	node-caps=no)=99	=>	inv-nodes=0-2=90	0.9090909090909091
+(menopause=premeno	inv-nodes=0-2)=111	=>	breast=right=104	0.9369369369369369
+(menopause=premeno	irradiat=no)=111	=>	breast=right=106	0.954954954954955
+(menopause=premeno	node-caps=no)=117	=>	breast=right=116	0.9914529914529915
+(node-caps=no)=221	=>	inv-nodes=0-2=200	0.9049773755656109
+(node-caps=no	breast-quad=left_low)=85	=>	inv-nodes=0-2=77	0.9058823529411765
+(node-caps=no	breast-quad=left_low	irradiat=no)=70	=>	menopause=premeno=68	0.9714285714285714
+(node-caps=no	breast-quad=left_low	irradiat=no)=70	=>	inv-nodes=0-2=66	0.9428571428571428
+(node-caps=no	breast-quad=left_up	irradiat=no)=62	=>	inv-nodes=0-2=57	0.9193548387096774
+(node-caps=no	breast=left)=115	=>	menopause=ge40=106	0.9217391304347826
+(node-caps=no	breast=left)=115	=>	inv-nodes=0-2=109	0.9478260869565217
+(node-caps=no	breast=left	irradiat=no)=101	=>	inv-nodes=0-2=97	0.9603960396039604
+(node-caps=no	breast=left	irradiat=no)=101	=>	menopause=ge40=94	0.9306930693069307
+(node-caps=no	breast=right	irradiat=no)=86	=>	inv-nodes=0-2=79	0.9186046511627907
+(node-caps=no	deg-malig=1)=66	=>	inv-nodes=0-2=65	0.9848484848484849
+(node-caps=no	deg-malig=1)=66	=>	irradiat=no=62	0.9393939393939394
+(node-caps=no	deg-malig=1	irradiat=no)=62	=>	inv-nodes=0-2=61	0.9838709677419355
+(node-caps=no	deg-malig=2	irradiat=no)=86	=>	inv-nodes=0-2=80	0.9302325581395349
+(node-caps=no	irradiat=no)=187	=>	inv-nodes=0-2=176	0.9411764705882353
